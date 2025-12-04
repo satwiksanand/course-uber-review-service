@@ -1,0 +1,10 @@
+spring.application.name=uber-review-service
+
+spring.datasource.url=jdbc:mysql://localhost:3306/local_uber_db
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
