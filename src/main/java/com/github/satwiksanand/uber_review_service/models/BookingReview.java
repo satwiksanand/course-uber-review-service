@@ -15,4 +15,9 @@ public class BookingReview extends BaseModel {
     @Column(nullable = false)
     private String content;
     private Double rating;
+
+    @Override
+    public String toString() {
+        return "content:-> " + this.content +" rating:-> " + this.rating;
+    }
 }
