@@ -2,7 +2,6 @@ package com.github.satwiksanand.uber_review_service.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -22,4 +21,10 @@ public class Booking extends BaseModel{
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long totalDistance;
+
+    @ManyToOne
+    private Driver driver;
+
+    @ManyToOne
+    private Passenger passenger;
 }
