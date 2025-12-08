@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,4 +18,9 @@ public class Driver extends BaseModel{
 
     @OneToMany(mappedBy = "driver")
     private List<Booking> bookings;
+
+    @Override
+    public String toString() {
+        return "name of the driver:-> " + this.name + " license number is " + this.licenseNumber;
+    }
 }
