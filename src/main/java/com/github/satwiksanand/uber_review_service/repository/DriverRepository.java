@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface DriverRepository extends JpaRepository<Driver, Long> {
@@ -20,4 +21,9 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
             @Param("id") Long id,
             @Param("ln") String licenseNumber
     );
+
+    //using hibernate query language
+
+    @Query(value = "select d from Driver as d where d.name = :name")
+    List<Driver> hqlFindByName(@Param("name") String name);
 }

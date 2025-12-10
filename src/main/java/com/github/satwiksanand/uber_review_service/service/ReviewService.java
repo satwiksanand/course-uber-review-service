@@ -1,5 +1,6 @@
 package com.github.satwiksanand.uber_review_service.service;
 
+import com.fasterxml.jackson.core.JsonToken;
 import com.github.satwiksanand.uber_review_service.models.Booking;
 import com.github.satwiksanand.uber_review_service.models.BookingReview;
 import com.github.satwiksanand.uber_review_service.models.BookingStatus;
@@ -10,6 +11,7 @@ import com.github.satwiksanand.uber_review_service.repository.ReviewRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,26 +33,9 @@ public class ReviewService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("running baby");
-//
-//        BookingReview bookingReview = BookingReview.builder().rating(4.0).content("this is the third review").build();
-//        Booking booking = Booking.builder()
-//                .startTime(LocalDateTime.now())
-//                .endTime(LocalDateTime.now())
-//                .totalDistance(10L)
-//                .bookingReview(bookingReview)
-//                .bookingStatus(BookingStatus.ARRIVED)
-//                .build();
-//        bookingRepository.save(booking);
-//        List<BookingReview> allBookingReview = reviewRepository.findAll();
-//        for(BookingReview curr : allBookingReview){
-//            System.out.println(curr.toString());
-//        }
-        Optional<Driver> driver = driverRepository.rawFindByIdAndLicenseNumber(1L, "BH12345");
-        if(driver.isPresent()){
-            System.out.println(driver.get().getName());
-        }
-        else{
-            System.out.println("could not find the entity");
+        List<Driver> drivers = driverRepository.hqlFindByName("raju");
+        for(Driver driver : drivers){
+            System.out.println(driver);
         }
     }
 }

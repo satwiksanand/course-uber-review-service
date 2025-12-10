@@ -27,4 +27,9 @@ public class Booking extends BaseModel{
 
     @ManyToOne
     private Passenger passenger;
+
+    @Override
+    public String toString(){
+        return this.bookingStatus + " " + this.totalDistance;
+    }
 }

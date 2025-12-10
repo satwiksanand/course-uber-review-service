@@ -1,6 +1,7 @@
 package com.github.satwiksanand.uber_review_service.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
@@ -16,11 +17,11 @@ public class Driver extends BaseModel{
     private String name;
     private String licenseNumber;
 
-    @OneToMany(mappedBy = "driver")
+    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
     @Override
     public String toString() {
-        return "name of the driver:-> " + this.name + " license number is " + this.licenseNumber;
+        return "name of the driver:-> " + this.name + " license number is " + this.licenseNumber + " id is " + this.id;
     }
 }
