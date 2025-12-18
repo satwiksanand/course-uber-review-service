@@ -16,6 +16,9 @@ public class BookingReview extends BaseModel {
     private String content;
     private Double rating;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Booking booking;
+
     @Override
     public String toString() {
         return "content:-> " + this.content +" rating:-> " + this.rating;

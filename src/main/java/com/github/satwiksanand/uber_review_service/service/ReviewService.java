@@ -26,7 +26,5 @@ public class ReviewService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("running baby");
-        BookingReview bookingReview = bookingRepository.findReviewByBookingId(1L);
-        System.out.println(bookingReview.toString());
     }
 }
