@@ -2,7 +2,6 @@ package com.github.satwiksanand.uber_review_service.service;
 
 import com.github.satwiksanand.uber_review_service.adapters.BookingReviewDtoToBookingReviewAdapter;
 import com.github.satwiksanand.uber_review_service.dtos.BookingReviewDto;
-import com.github.satwiksanand.uber_review_service.models.Booking;
 import com.github.satwiksanand.uber_review_service.models.BookingReview;
 import com.github.satwiksanand.uber_review_service.repository.BookingRepository;
 import com.github.satwiksanand.uber_review_service.repository.ReviewRepository;
@@ -14,13 +13,11 @@ import java.util.Optional;
 @Service
 public class BookingReviewService {
     private final ReviewRepository reviewRepository;
-    private final BookingRepository bookingRepository;
 
 
     public BookingReviewService(ReviewRepository reviewRepository,
-                                BookingRepository bookingRepository) {
+                                BookingRepository bookingRepository, BookingReviewDtoToBookingReviewAdapter bookingReviewDtoToBookingReviewAdapter) {
         this.reviewRepository = reviewRepository;
-        this.bookingRepository = bookingRepository;
     }
 
     public List<BookingReviewDto> getAllBookings(){
@@ -46,15 +43,10 @@ public class BookingReviewService {
     }
 
     public BookingReviewDto createBookingReview(BookingReviewDto bookingReviewDto) throws Exception {
-        Optional<Booking> booking = bookingRepository.findById(bookingReviewDto.getBookingId());
-        if(booking.isPresent()){
-            BookingReview bookingReview = new BookingReview();
-            bookingReview.setRating(bookingReviewDto.getRating());
-            bookingReview.setContent(bookingReviewDto.getContent());
-            bookingReview.setBooking(booking.get());
-            BookingReview savedBookingReview = reviewRepository.save(bookingReview);
-            return BookingReviewDtoToBookingReviewAdapter.toDto(savedBookingReview);
+        BookingReview bookingReview = BookingReviewDtoToBookingReviewAdapter.toEntity(bookingReviewDto);
+        if(bookingReview == null){
+            throw new Exception("relevant booking not found!");
         }
-        throw new Exception("relevant booking not found!");
+        return  BookingReviewDtoToBookingReviewAdapter.toDto(reviewRepository.save(bookingReview));
     }
 }
